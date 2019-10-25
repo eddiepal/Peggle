@@ -56,7 +56,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            let location = touch.location(in: self)
+            var location = touch.location(in: self)
+            location.y = 700
             
             let objects = nodes(at: location)
             
