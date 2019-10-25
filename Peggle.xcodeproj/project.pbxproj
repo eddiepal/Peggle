@@ -42,6 +42,7 @@
 		59782FF42359D1B900A22A06 /* slotGlowGood.png in Resources */ = {isa = PBXBuildFile; fileRef = 59782FD82359D1B900A22A06 /* slotGlowGood.png */; };
 		59782FF52359D1B900A22A06 /* slotGlowGood@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59782FD92359D1B900A22A06 /* slotGlowGood@2x.png */; };
 		59782FF62359D1B900A22A06 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 59782FDA2359D1B900A22A06 /* spark.png */; };
+		59B82258236306ED0031AE0E /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B82257236306ED0031AE0E /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		59782FD82359D1B900A22A06 /* slotGlowGood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slotGlowGood.png; sourceTree = "<group>"; };
 		59782FD92359D1B900A22A06 /* slotGlowGood@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slotGlowGood@2x.png"; sourceTree = "<group>"; };
 		59782FDA2359D1B900A22A06 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		59B82257236306ED0031AE0E /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				59782FB32359D12600A22A06 /* Assets.xcassets */,
 				59782FB52359D12600A22A06 /* LaunchScreen.storyboard */,
 				59782FB82359D12600A22A06 /* Info.plist */,
+				59B82257236306ED0031AE0E /* Helper.swift */,
 			);
 			path = Peggle;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				59782FAD2359D12600A22A06 /* GameScene.swift in Sources */,
 				59782FAF2359D12600A22A06 /* GameViewController.swift in Sources */,
 				59782FA72359D12600A22A06 /* AppDelegate.swift in Sources */,
+				59B82258236306ED0031AE0E /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
