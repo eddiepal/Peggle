@@ -5,6 +5,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var scoreLabel: SKLabelNode!
     var ballsRemainingLabel: SKLabelNode!
+    var defeatScreenLabel: SKLabelNode!
     
     var score = 0 {
         didSet {
@@ -60,6 +61,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ballsRemainingLabel.horizontalAlignmentMode = .right
         ballsRemainingLabel.position = CGPoint(x: 500, y: 700)
         addChild(ballsRemainingLabel)
+        
+        if(score <= 0)
+        {
+            defeatScreenLabel = SKLabelNode(fontNamed: "Chalkduster")
+            defeatScreenLabel.text = "Game Over!"
+            defeatScreenLabel.horizontalAlignmentMode = .right
+            defeatScreenLabel.position = CGPoint(x: 500, y: 500)
+            addChild(defeatScreenLabel)
+        }
+
         
         editLabel = SKLabelNode(fontNamed: "Chalkduster")
         editLabel.text = "Edit"
@@ -118,7 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     let ball = SKSpriteNode(imageNamed: ballColor[randomIndex])
                     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
                     ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
-                    ball.physicsBody?.restitution = 0.4
+                    ball.physicsBody?.restitution = 1.2
                     location.y = 700
                     ball.position = location
                     ball.name = "ball"
