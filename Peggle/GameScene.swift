@@ -57,7 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             var location = touch.location(in: self)
-            location.y = 700
+            
             
             let objects = nodes(at: location)
             
@@ -68,6 +68,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else{
                 if editingMode
                 {
+                    //if touch.location(in: view?.center.x) == 5.00
+                   // {
+                        
+                    //}
                     let size = CGSize(width: GKRandomDistribution(lowestValue: 16, highestValue: 128).nextInt(), height: 16)
                     let box = SKSpriteNode(color: RandomColor(), size: size)
                     box.zRotation = RandomCGFloat(min: 0, max: 3)
@@ -75,24 +79,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     
                     box.physicsBody = SKPhysicsBody(rectangleOf: box.size)
                     box.physicsBody?.isDynamic = false
+                    box.name = "box"
                     
-                    addChild(box)
+                    
+                    for item in objects
+                    {
+                        if item.name == "box"
+                        {
+                            item.removeFromParent()
+                            break
+                        }
+                        else
+                        {
+                            addChild(box)
+                            break
+                        }
+                    }
                 }
                 else
                 {
                 var ballColor = ["ballRed", "ballYellow","ballGreen", "ballCyan"]
                 let randomIndex = Int(arc4random_uniform(UInt32(ballColor.count)))
                 let ball = SKSpriteNode(imageNamed: ballColor[randomIndex])
-             
                     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
                     ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
                     ball.physicsBody?.restitution = 0.4
+                    location.y = 700
                     ball.position = location
                     ball.name = "ball"
                     addChild(ball)
                 }
             }
         }
+
+    }
+    
+    func moveBox(at position: CGPoint)
+    {
+        
     }
     
     func makeBouncer(at position: CGPoint) {
