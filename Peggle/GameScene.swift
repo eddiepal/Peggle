@@ -61,17 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ballsRemainingLabel.horizontalAlignmentMode = .right
         ballsRemainingLabel.position = CGPoint(x: 500, y: 700)
         addChild(ballsRemainingLabel)
-        
-        if(score <= 0)
-        {
-            defeatScreenLabel = SKLabelNode(fontNamed: "Chalkduster")
-            defeatScreenLabel.text = "Game Over!"
-            defeatScreenLabel.horizontalAlignmentMode = .right
-            defeatScreenLabel.position = CGPoint(x: 500, y: 500)
-            addChild(defeatScreenLabel)
-        }
 
-        
         editLabel = SKLabelNode(fontNamed: "Chalkduster")
         editLabel.text = "Edit"
         editLabel.position = CGPoint(x: 80, y: 700)
@@ -82,7 +72,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let touch = touches.first {
             var location = touch.location(in: self)
             
-            
+            if(ballsRemaining <= 0)
+            {
+                defeatScreenLabel = SKLabelNode(fontNamed: "Chalkduster")
+                defeatScreenLabel.text = "Game Over!"
+                defeatScreenLabel.horizontalAlignmentMode = .right
+                defeatScreenLabel.position = CGPoint(x: 600, y: 425)
+                defeatScreenLabel.isHidden = false
+                addChild(defeatScreenLabel)
+            }
             let objects = nodes(at: location)
             
             if objects.contains(editLabel)
@@ -129,7 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     let ball = SKSpriteNode(imageNamed: ballColor[randomIndex])
                     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
                     ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
-                    ball.physicsBody?.restitution = 1.2
+                    ball.physicsBody?.restitution = 0.5
                     location.y = 700
                     ball.position = location
                     ball.name = "ball"
