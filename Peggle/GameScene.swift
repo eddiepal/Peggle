@@ -72,15 +72,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let touch = touches.first {
             var location = touch.location(in: self)
             
-            if(ballsRemaining <= 0)
-            {
-                defeatScreenLabel = SKLabelNode(fontNamed: "Chalkduster")
-                defeatScreenLabel.text = "Game Over!"
-                defeatScreenLabel.horizontalAlignmentMode = .right
-                defeatScreenLabel.position = CGPoint(x: 600, y: 425)
-                defeatScreenLabel.isHidden = false
-                addChild(defeatScreenLabel)
-            }
+
             let objects = nodes(at: location)
             
             if objects.contains(editLabel)
@@ -132,7 +124,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     ball.position = location
                     ball.name = "ball"
                     addChild(ball)
-                    ballsRemaining -= 1
                     }
                 }
             }
@@ -189,10 +180,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if object.name == "bad" {
             destroy(ball: ball)
             score -= 1
+            ballsRemaining -= 1
         }
         if object.name == "box"
         {
             object.removeFromParent()
+        }
+        
+        if(ballsRemaining <= 0)
+        {
+            defeatScreenLabel = SKLabelNode(fontNamed: "Chalkduster")
+            defeatScreenLabel.text = "Game Over!"
+            defeatScreenLabel.horizontalAlignmentMode = .right
+            defeatScreenLabel.position = CGPoint(x: 600, y: 425)
+            defeatScreenLabel.isHidden = false
+            addChild(defeatScreenLabel)
         }
     }
     
