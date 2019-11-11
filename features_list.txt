@@ -5,9 +5,9 @@ IMPLEMENTED
 -Players have a limit of 5 balls
 -Game over text when the player runs out of balls
 -Obstacles remove when hit by balls
+-Restart after game over
 
 TO BE IMPLEMENTED
--Restart after game over
 -Ball landing on green slot gives an extra ball to the player
 -Complicated scoring
 -Ball bouncing on two rainbows transports it to the top of the screen with the same velocity
