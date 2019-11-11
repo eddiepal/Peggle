@@ -13,13 +13,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    var ballsRemaining = 5 {
+    var ballsRemaining = 10 {
         didSet {
-            ballsRemainingLabel.text = "Ball remaining: \(ballsRemaining)"
+            ballsRemainingLabel.text = "Balls remaining: \(ballsRemaining)"
         }
     }
     
-    var ballsUsed = 5;
+    var ballsUsed = 10;
     
     var editLabel: SKLabelNode!
     
@@ -53,15 +53,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         makeBouncer(at: CGPoint(x: 1024, y: 0))
         
         scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
-        scoreLabel.text = "Score: 5"
+        scoreLabel.text = "Score: 0"
         scoreLabel.horizontalAlignmentMode = .right
         scoreLabel.position = CGPoint(x: 980, y: 700)
         addChild(scoreLabel)
         
         ballsRemainingLabel = SKLabelNode(fontNamed: "Chalkduster")
-        ballsRemainingLabel.text = "Balls remaining: 5"
+        ballsRemainingLabel.text = "Balls remaining: \(ballsRemaining)"
         ballsRemainingLabel.horizontalAlignmentMode = .right
-        ballsRemainingLabel.position = CGPoint(x: 500, y: 700)
+        ballsRemainingLabel.position = CGPoint(x: 650, y: 700)
         addChild(ballsRemainingLabel)
 
         editLabel = SKLabelNode(fontNamed: "Chalkduster")
@@ -121,15 +121,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     let ball = SKSpriteNode(imageNamed: ballColor[randomIndex])
                     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2.0)
                     ball.physicsBody!.contactTestBitMask = ball.physicsBody!.collisionBitMask
-                    ball.physicsBody?.restitution = 0.5
+                    ball.physicsBody?.restitution = 0.6
                     location.y = 700
                     ball.position = location
                     ball.name = "ball"
                     addChild(ball)
                     
-                    }
-                else{
-
                     }
                 }
             }
@@ -180,17 +177,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func collisionBetween(ball: SKNode, object: SKNode) {
+        
         if object.name == "good" {
             destroy(ball: ball)
             score += 1
             ballsUsed += 2
             print("here \(ballsUsed)")
             ballsRemaining += 1
+
+            
         } else if object.name == "bad" {
             destroy(ball: ball)
             score -= 1
             ballsRemaining -= 1
         }
+
         if object.name == "box"
         {
             object.removeFromParent()
@@ -208,7 +209,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let seconds = 4.0
             DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
                 self.score = 0;
-                self.ballsRemaining = 5;
+                self.ballsRemaining = 10;
                 self.defeatScreenLabel.isHidden = true
                 self.ballsUsed = 5
             }
