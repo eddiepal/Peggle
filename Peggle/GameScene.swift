@@ -115,6 +115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 {
                 if(ballsUsed > 0)
                 {
+                    ballsUsed -= 1;
                     var ballColor = ["ballRed", "ballYellow","ballGreen", "ballCyan"]
                     let randomIndex = Int(arc4random_uniform(UInt32(ballColor.count)))
                     let ball = SKSpriteNode(imageNamed: ballColor[randomIndex])
@@ -125,7 +126,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     ball.position = location
                     ball.name = "ball"
                     addChild(ball)
-                    ballsUsed -= 1;
+                    
                     }
                 else{
 
@@ -182,12 +183,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if object.name == "good" {
             destroy(ball: ball)
             score += 1
-            ballsUsed += 1
+            ballsUsed += 2
+            print("here \(ballsUsed)")
+            ballsRemaining += 1
         } else if object.name == "bad" {
             destroy(ball: ball)
             score -= 1
             ballsRemaining -= 1
-            
         }
         if object.name == "box"
         {
