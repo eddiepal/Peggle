@@ -19,6 +19,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    var ballsUsed = 5;
+    
     var editLabel: SKLabelNode!
     
     var editingMode: Bool = false {
@@ -71,7 +73,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             var location = touch.location(in: self)
-            
 
             let objects = nodes(at: location)
             
@@ -112,7 +113,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 else
                 {
-                if(ballsRemaining > 0)
+                if(ballsUsed > 0)
                 {
                     var ballColor = ["ballRed", "ballYellow","ballGreen", "ballCyan"]
                     let randomIndex = Int(arc4random_uniform(UInt32(ballColor.count)))
@@ -124,6 +125,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     ball.position = location
                     ball.name = "ball"
                     addChild(ball)
+                    ballsUsed -= 1;
+                    }
+                else{
+
                     }
                 }
             }
@@ -177,10 +182,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if object.name == "good" {
             destroy(ball: ball)
             score += 1
+            ballsUsed += 1
         } else if object.name == "bad" {
             destroy(ball: ball)
             score -= 1
             ballsRemaining -= 1
+            
         }
         if object.name == "box"
         {
@@ -195,6 +202,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             defeatScreenLabel.position = CGPoint(x: 600, y: 425)
             defeatScreenLabel.isHidden = false
             addChild(defeatScreenLabel)
+            
+            let seconds = 4.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+                self.score = 0;
+                self.ballsRemaining = 5;
+                self.defeatScreenLabel.isHidden = true
+                self.ballsUsed = 5
+            }
         }
     }
     
